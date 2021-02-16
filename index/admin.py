@@ -1,3 +1,6 @@
 from django.contrib import admin
-
-# Register your models here.
+from .models import doctor_profile
+class doctorAdmin(admin.ModelAdmin):
+    list_display=['user','name']
+    prepopulated_fields={'slug':['name',]}
+admin.site.register(doctor_profile)
