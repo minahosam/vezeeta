@@ -3,9 +3,8 @@
 {% block body %}
 
 <div dir="rtl">
-{% include 'home/search.html' %}
     <!-- job_listing_area_start  -->
-    {% for doctor in doctors %}
+    {% for doctor in results %}
     <div class="job_listing_area">
         <div class="container">
 
@@ -20,7 +19,7 @@
 
                                 </div>
                                 <div class="jobs_conetent">
-                                    <a href="{% url 'index:detail' doctor.slug %}"><h5>دكتور{{doctor.name}} </h5></a>
+                                    <a href=""><h5>دكتور{{doctor.name}} </h5></a>
                                     <h6>subtitle</h6>
 
                                     <div class="links_locat">

@@ -8,48 +8,33 @@
                 <h5>١٦٠٠٠ دكتور -٤٠٠٠ استاذ واستشاري - اكثر من ۲٠ تخصص</h5>
                 <br>
             </div>
-            <form  method="GET" action="">
+            <form  method="GET" action="{% url 'index:search' %}">
             <div class="row cat_search" >
 
                 <div class="col-lg-3 col-md-4">
                     <div class="single_input">
-                        <input type="text" placeholder="إسم الدكتور" >
+                        <input type="text" placeholder="إسم الدكتور" name="name" >
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
                     <div class="single_input">
-                        <select class="wide" >
+                        <select class="wide" name='loc'>
                             <option value="" >الموقع</option>
-                            <option value="المنصوره">المنصوره</option>
-                            <option value="الدقي">الدقي</option>
-                            <option value="4">Sylet</option>
+                            {% for ad in address %}
+                            <option value="{{ad}}">{{ad}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
 
                 <div class="col-lg-3 col-md-4">
                     <div class="single_input">
-                        <select class="wide" >
+                        <select class="wide" name='spec'>
                             <option value="">التخصص</option>
-                            <option value="جلدية">جلدية</option>
-                            <option value="اسنان">اسنان</option>
-                            <option value="نفسي">نفسي</option>
-                            <option value="اطفال">اطفال حديثي الولادة</option>
-                            <option value="مخ">مخ واعصاب</option>
-                            <option value="عظام">عظام</option>
-                            <option value="نساء">نساء وتوليد</option>
-                            <option value="انف">انف واذن وحنجرة</option>
-                            <option value="قلب">قلب واوعية دموية</option>
-                            <option value="امراض">امراض دم</option>
-                            <option value="اورام">اورام</option>
-                            <option value="باطنه">باطنه</option>
-                            <option value="تخسيس">تخسيس وتغذية</option>
-                            <option value="جاطفال">جراحة اطفال</option>
-                            <option value="جاورام">جراحة اورام</option>
-                            <option value="جاوعيه">جراحة اوعية دموية</option>
-                            <option value="جتجميل">جراحة تجميل</option>
-                            <option value="سمنه">جراحه سمنة ومناظير </option>
+                            {% for category in categories %}
+                            <option value="{{category.speialists}}">{{category.speialists}}</option>
+                            {% endfor %}
                             </select>
                     </div>
                 </div>
