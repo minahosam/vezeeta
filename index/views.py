@@ -23,13 +23,13 @@ def detail(request,slug):
     address=place.objects.all()
     return render(request,'home/detail.html',{'doctor':doctor1 , 'categories':categories , 'address':address})
 def search_res(request):
-    l=request.GET['loc','']
+    l=request.GET['loc']
     name1=request.GET['name']
     spec1=request.GET['spec']
     search_result=doctor_profile_1.objects.filter(
-        Q(name__contains=name1) |
-        Q(specialist_doctor__speialists__contains=spec1) |
-        Q(address1__location__contains=l)
+        Q(address1__location__icontains=l) &        
+        Q(specialist_doctor__speialists__icontains=spec1) &
+        Q(name__icontains=name1)
 
     )
     return render(request,'home/search_result.html',{'results':search_result})
