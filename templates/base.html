@@ -14,7 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- <link rel="manifest" href="site.webmanifest"> -->
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/logo2.png' %}">
+    <link rel="stylesheet" href="{% static 'css/pagination.css">
     <!-- Place favicon.ico in the root directory -->
 
     <!-- CSS here -->
@@ -108,19 +109,19 @@
                     </a>
                 </div>
                 <p>
-                    ma7mod.raouf@gmail.com <br>
-                    +01005162422 <br>
-                    Mansora, Egypt
+                    {{foot.email}} <br>
+                    {{foot.phone_number}} <br>
+                    {{foot.location}}
                 </p>
                 <div class="socail_links">
                     <ul>
                         <li>
-                            <a href="https://www.facebook.com/m7modsabra">
+                            <a href="{{foot.fb_link}}">
                                 <i class="ti-facebook"></i>
                             </a>
                         </li>
                         <li>
-                            <a href="https://www.youtube.com/channel/UC7FFcZc90vE5FfR_dgA_dVg?view_as=subscriber">
+                            <a href="{{foot.youtube_link}}">
                                 <i class="fa fa-youtube"></i>
                             </a>
                         </li>

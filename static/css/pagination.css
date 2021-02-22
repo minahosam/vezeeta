@@ -1,0 +1,22 @@
+
+/* Pagination links */
+.block-27{
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    position:absolute;
+    top:50%;
+    bottom: 50%;
+    transform: translate(-50%,-50%);
+  }
+  
+  /* Style the active/current link */
+  .block-27 a.active {
+    background-color: dodgerblue;
+    color: white;
+  }
+  
+  /* Add a grey background color on mouse-over */
+  .block-27 a:hover:not(.active) {background-color: #ddd;}

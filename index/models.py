@@ -40,7 +40,7 @@ class doctor_profile_1(models.Model):
     doctor_image=models.ImageField(upload_to='doctor_photo/')
     slug=models.SlugField(blank=True,null=True,max_length=50)
     def __str__(self):
-        return str(self.specialist_doctor)
+        return self.name
     
     def save(self, *args, **kwargs):
         if not self.slug:
