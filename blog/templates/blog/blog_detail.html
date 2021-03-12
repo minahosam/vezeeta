@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+  
+<div dir="rtl">
+    <!-- Search -->
+    <div class="catagory_area ">
+<div class="container " style="margin-top: 10rem">
+            <div class=" single_text">
+                <h2>احجز مع
+                    أفضل دكتور في مصر</h3>
+                <h3>احجز اونلاين او كلم  ١٧٧٥۸</h4>
+                <h4>١٦٠٠٠ دكتور -٤٠٠٠ استاذ واستشاري - اكثر من ۲٠ تخصص</h5>
+                <br>
+            </div>
+            <form  method="GET" action="">
+            <div class="row cat_search" >
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="single_input">
+                        <input type="text" placeholder="إسم الدكتور" >
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="single_input">
+                        <select class="wide" >
+                            <option value="" >الموقع</option>
+                            <option value="المنصوره">المنصوره</option>
+                            <option value="الدقي">الدقي</option>
+                            <option value="4">Sylet</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="single_input">
+                        <select class="wide" >
+                            <option value="">التخصص</option>
+                            <option value="جلدية">جلدية</option>
+                            <option value="اسنان">اسنان</option>
+                            <option value="نفسي">نفسي</option>
+                            <option value="اطفال">اطفال حديثي الولادة</option>
+                            <option value="مخ">مخ واعصاب</option>
+                            <option value="عظام">عظام</option>
+                            <option value="نساء">نساء وتوليد</option>
+                            <option value="انف">انف واذن وحنجرة</option>
+                            <option value="قلب">قلب واوعية دموية</option>
+                            <option value="امراض">امراض دم</option>
+                            <option value="اورام">اورام</option>
+                            <option value="باطنه">باطنه</option>
+                            <option value="تخسيس">تخسيس وتغذية</option>
+                            <option value="جاطفال">جراحة اطفال</option>
+                            <option value="جاورام">جراحة اورام</option>
+                            <option value="جاوعيه">جراحة اوعية دموية</option>
+                            <option value="جتجميل">جراحة تجميل</option>
+                            <option value="سمنه">جراحه سمنة ومناظير </option>
+                            </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-12">
+                    <div class="job_btn">
+                        <input type="submit" class="boxed-btn3" value="ابحث هنا">
+                    </div>
+                </div>
+
+            </div>
+            </form> 
+        </div>
+    </div>
+    <!-- endsearch -->
+
+</div>
+<!-- bradcam_area  -->
+
+
+<div dir="rtl">
+    <!-- bradcam_area  -->
+
+
+
+<div class="bradcam_text " >
+    <h3 >تفاصيل المقاله</h3>
+</div>
+
+  <!--/ bradcam_area  -->
+
+   <!--================Blog Area =================-->
+<section class="blog_area single-post-area section-padding">
+<div class="container">
+    <div class="row">
+    <div class="col-lg-8 posts-list">
+        <div class="single-post">
+            <div class="feature-img">
+                    
+                <img class="img-fluid image-detail" src="{{post.post_image.url}}" alt="">
+                <div class="jobs_right">
+                    <div class="apply_now">
+                        <a class="boxed-btn3" href="{% url 'blog:update' post.id %}">تعديل المقالة</a>
+                        <a  class="boxed-btn3 delete_blog"  href="{% url 'blog:delete' post.id%}" >حذف المقالة</a>
+                    </div>
+                </div>
+            </div>
+            <div class="blog_details">
+                
+                <h2>{{post.title}}</h2>
+                
+                <!--like with refresh-->
+                {% if request.user in post.like.all %}
+                    <a id="likebutton" class=" btn btn-primary btn-lg"   data-catid="{{ post.id }}" href="{% url 'blog:like' post.id %}" data-catid="">dislike</a> </p> <p id="message"></p>
+                {% else %}
+                    <a id="likebutton" class=" btn btn-primary btn-lg"   data-catid="{{ post.id }}" href="{% url 'blog:like' post.id %}" data-catid="">Like</a> </p> <p id="message"></p>
+                {% endif %}
+                    
+                <button class=" btn btn-primary btn-lg likebutonn" type="button" id="{{post.id}}"  href="#">
+                    
+                    {% if request.user in post.like.all %}
+                        unlike
+                    {% else %}
+                        like
+                    {% endif %}
+                        
+                </button>
+                <div class="ui grid">
+                    <div class="column">
+                        <div class="likecount"> {{post.like.count}} </div>
+                    </div>
+                    <div class="column">
+                        likes
+                    </div>
+                </div>
+                <ul class="blog-info-link mt-3 mb-4">
+                <li><a href="#"><i class="fa fa-user"></i><p>{{post.content}}</p> </a></li>
+                <li><a href="#"><i class="fa fa-comments"></i> 03 كومنتات</a></li>
+                <li><a href="#"><i class="fa fa-likes"></i> {{post.like.count}} like</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="navigation-top">
+            <div class="d-sm-flex justify-content-between text-center">
+                <p class="like-info"><span class="align-middle"><i class="fa fa-heart"></i></span> Lily and 4
+                people like this</p>
+                <div class="col-sm-4 text-center my-2 my-sm-0">
+                <!-- <p class="comment-count"><span class="align-middle"><i class="fa fa-comment"></i></span> 06 Comments</p> -->
+                </div>
+                <ul class="social-icons">
+                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="blog-author">
+            <div class="media align-items-center">
+                <img src="img/blog/author.png" alt="">
+                <div class="media-body">
+                <a href="#">
+                    <h4>تم النشر بواسطه <span style="color: blue;">{{post.author}}</span> في تاريخ <span style="color: blue;">{{post.post_date}}</span></h4>
+                </a>
+                <p></p>
+                </div>
+            </div>
+        </div>
+        <div class="comments-area">
+            <h4>05 Comments</h4>
+            <div class="comment-list">
+                <div class="single-comment justify-content-between d-flex">
+                    <div class="user justify-content-between d-flex">
+                        <div class="thumb">
+                            <img src="img/comment/comment_2.png" alt="">
+                        </div>
+                        <div class="desc">
+                            <p class="comment">هذا المقال مفيد جدا
+                            </p>
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <h5>
+                                        <a href="#">محمود رؤف</a>
+                                    </h5>
+                                    <p class="date">2/2/2020 </p>
+                                </div>
+                                <div class="reply-btn">
+                                    <a href="#" class="btn-reply text-uppercase">reply</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="comment-form">
+            <h4>Leave a Reply</h4>
+            <form method="POST" class="form-contact comment_form" enctype="multipart/form-data">
+
+                <div class="row">
+                    <div class="col-12">
+                    </div>
+                    <div class="col-12">
+                    <div class="form-group">
+                        <textarea class="form-control w-100" name="comments" id="comments" cols="30" rows="9"
+                            placeholder="Write Comment"></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                    </div>
+                </div>
+        
+                </div>
+                <div class="form-group">
+                <button type="submit" class="button button-contactForm btn_1 boxed-btn" >Send Message</button>
+                
+            </div>
+            </form>
+        </div>        </div>
+    <div class="col-lg-4">
+        <div class="blog_right_sidebar">
+                <aside class="single_sidebar_widget search_widget">
+                    <form method="GET">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <input name='q' type="text" class="form-control" placeholder='بحث فى المقالات'
+                                    onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = 'Search Keyword'">
+                                <div class="input-group-append">
+                                    <button class="btn" type="button"><i class="ti-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
+                            type="submit">إبحث</button>
+                    </form>
+                </aside>
+                <aside class="single_sidebar_widget popular_post_widget">
+                    <h3 class="widget_title">أقدم المقالات</h3>
+
+
+                        <div class="media post_item">
+                                <img src="img/blog/single_blog_1.png" alt="" style="width: 30spx; height: 30px;">
+                            <div class="media-body">
+                                <a href="single-blog.html">
+                                    <h3>تجميل وزراعه الاسنان</h3>
+                                </a>
+                                <p>تم النتشر في : <span style="color: #00D363;">3/6/2020</p>
+                            </div>
+                        </div>
+                    
+
+                </aside>
+        </div>
+    </div>
+    </div>
+</div>
+</section>
+</div>
+    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $('.likebutonn').click(function(e){
+        e.preventDefault();
+        console.log('work')
+        var post_id = $(this).attr('id');
+        console.log(post_id);
+        var liketext = $('.likebutonn').text();
+        //var liketext = $(".like-btn"+post_id).find("i").hasClass("fa-heart-o") ? "Unlike":"Like"//check for class and if true then set value as unlike or like..
+        console.log(liketext);
+        var trim = $.trim(liketext);
+        console.log(trim);
+        var url = "'{% url 'blog:ajax' post.id  %}'";
+        console.log(url);
+        let res;
+        var likecount = $('.likecount').text();
+        console.log(likecount);
+        var trimcountr = parseInt(likecount);
+        $.ajax({
+            type:'GET',
+            url: "likee" ,
+            data: {
+                'post_id':post_id
+            },
+            success: function(response){
+                if (trim === 'unlike'){
+                    $('.likebutonn').text('like')
+                    res = trimcountr - 1
+                } else {
+                    $('.likebutonn').text('unlike')
+                    res = trimcountr + 1
+                }
+            $('.likecount').text(res)
+
+            },
+            error: function(response){
+                console.log('error',response)
+            }
+
+        })
+    });
+</script>
+{% endblock body %}   

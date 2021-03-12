@@ -5,6 +5,7 @@
 <div dir="rtl">
     {% include 'home/search.html' %}
     <!-- job_listing_area_start  -->
+    <!-- Flexbox container for aligning the toasts -->
     {% for doctor in doctors %}
     <div class="job_listing_area">
         <div class="container">
@@ -48,7 +49,7 @@
                             </div>
                             <div class="jobs_right">
                                 <div class="apply_now">
-                                    <a class="boxed-btn3" href="">حجز كشف</a>
+                                    <a class="boxed-btn3" href="{% url 'index:reservation' %}">حجز كشف</a>
                                 </div>
 
                                 <div class="rating">
@@ -133,9 +134,9 @@
         {% endif %}
         {% for i in doctors.paginator.page_range %}
             {% if doctors.number == i %}
-        <li class="page-item"><a class="page-link" href="#">{{i}}</a></li>
-        {% else %}
-        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                <li class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
             {% endif %}
         {% endfor %}
         {% if doctors.has_next %}

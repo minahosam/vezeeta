@@ -702,6 +702,14 @@ h3 {
   }
 }
 
+.success{
+  list-style: none;
+  background-color: #2e6da4;
+  color: white;
+  box-shadow: 12px 12px 12px #e61c66;
+  text-align: center;
+}
+
 /* line 31, ../../Arafath/CL/December/235. Job board/HTML/scss/_section_title.scss */
 .section_title p {
   font-size: 16px;

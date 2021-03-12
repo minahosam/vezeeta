@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div dir="rtl">
+<div class="container">
+    <div class="signup">
+
+        <div class="col-md-8" >
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h4 class="auth-header"> احجز ميعاد ...</h4>
+
+
+                {{form2.as_p}}
+                <div class="buttons-w  "><button type="submit" class="btn btn-danger ml-5">احجز</button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+</div>
+{% endblock body %}

@@ -1,0 +1,52 @@
+    <!-- Search -->
+    <div class="catagory_area ">
+<div class="container " style="margin-top: 10rem">
+            <div class=" single_text">
+                <h3>احجز مع
+                    أفضل دكتور في مصر</h3>
+                <h4>احجز اونلاين او كلم  ١٧٧٥۸</h4>
+                <h5>١٦٠٠٠ دكتور -٤٠٠٠ استاذ واستشاري - اكثر من ۲٠ تخصص</h5>
+                <br>
+            </div>
+            <form  method="GET" action="{% url 'index:search' %}">
+            <div class="row cat_search" >
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="single_input">
+                        <input type="text" placeholder="إسم الدكتور" name="name" >
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="single_input">
+                        <select class="wide" name="loc">
+                            <option value="" >الموقع</option>
+                            {% for ad in address %}
+                            <option value="{{ad}}">{{ad}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-4">
+                    <div class="single_input">
+                        <select class="wide" name='spec'>
+                            <option value="">التخصص</option>
+                            {% for category in categories %}
+                            <option value="{{category.speialists}}">{{category.speialists}}</option>
+                            {% endfor %}
+                            </select>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-12">
+                    <div class="job_btn">
+                        <input type="submit" class="boxed-btn3" value="ابحث هنا">
+                    </div>
+                </div>
+
+            </div>
+            </form>
+        </div>
+    </div>
+    <!-- endsearch -->

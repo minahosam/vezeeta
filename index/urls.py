@@ -4,5 +4,7 @@ app_name='index'
 urlpatterns=[
     path('',views.home,name='index'),
     path('search/',views.search_res,name='search'),
-    path('<str:slug>/',views.detail,name='detail'),
+    path('home/<str:slug>/',views.detail,name='detail'),
+    path('reservation/',views.reservation,name='reservation'),
+    path('subscribed_mails/',views.subscribed_mail,name='subscribed'),
 ]

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}                     
+<div dir="rtl">
+<div class="container">
+    <div class="signup">
+    <div class="col-md-9" >
+          <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            <table>
+              <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+              </tr>
+              <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+              </tr>
+            </table>
+            <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+        
+            <div class="buttons-w  "><button type="submit" class="btn btn-success ml-5" value="login">تسجيل</button>
+            <button type="submit" class="btn btn-info  ml-5"><a href="">Github</a></button>
+            <button type="submit" class="btn btn-primary  ml-5"><a href="">facebook</a></button>
+          </form>
+        
+          {# Assumes you setup the password_reset view in your URLconf #}
+    </div>
+    </div>
+</div>
+</div>
+
+{% endblock body %}

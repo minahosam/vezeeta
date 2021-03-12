@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.utils.text import slugify
+from django.utils import timezone
+#from accounts.forms.new_user import email
+from datetime import date , time 
 gender_choices=[
     ('M','Male'),
     ('F','Female')
@@ -27,7 +30,7 @@ specialist=[
     ('جراحه سمنة ومناظير','جراحه سمنة ومناظير')
 ]
 class doctor_profile_1(models.Model):
-    #user=models.OneToOneField(User,related_name='user',on_delete=models.CASCADE,blank=True,null=True)
+    user=models.OneToOneField(User,related_name='user',on_delete=models.CASCADE,blank=True,null=True)
     name=models.CharField(max_length=1000,null=True,blank=True)
     gender= models.CharField(max_length=5,choices=gender_choices)
     specialist_doctor= models.ForeignKey('category', related_name='doctor_category', on_delete=models.CASCADE,blank=True,null=True)
@@ -64,3 +67,16 @@ class place(models.Model):
 
     def __str__(self):
         return self.location
+class subscribed_mails(models.Model):
+    email = models.EmailField(max_length=50,blank=True,null=True)
+    created=models.DateTimeField(default=timezone.now)
+    def __str__(self):
+        return self.email
+class doctor_reservation(models.Model):
+    name=models.ForeignKey(User,related_name='reservation_name',on_delete=models.CASCADE,null=True,blank=True)
+    email=models.EmailField(max_length=50,null=True,blank=True)
+    doctor_name=models.ForeignKey(doctor_profile_1,related_name='reservation_doctor',on_delete=models.CASCADE)
+    date_reservation1=models.DateField()
+    time_reservation=models.TimeField()
+    def __str__(self):
+        return str(self.name)
