@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bootstrap4 %}
 {% block body %}
   
 <div dir="rtl">
@@ -132,7 +133,7 @@
                 </div>
                 <ul class="blog-info-link mt-3 mb-4">
                 <li><a href="#"><i class="fa fa-user"></i><p>{{post.content}}</p> </a></li>
-                <li><a href="#"><i class="fa fa-comments"></i> 03 كومنتات</a></li>
+                <li><a href="#"><i class="fa fa-comments"></i> {{post.post_comment.count}}كومنتات</a></li>
                 <li><a href="#"><i class="fa fa-likes"></i> {{post.like.count}} like</a></li>
                 </ul>
             </div>
@@ -165,30 +166,51 @@
             </div>
         </div>
         <div class="comments-area">
-            <h4>05 Comments</h4>
-            <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                    <div class="user justify-content-between d-flex">
-                        <div class="thumb">
-                            <img src="img/comment/comment_2.png" alt="">
-                        </div>
-                        <div class="desc">
-                            <p class="comment">هذا المقال مفيد جدا
-                            </p>
-                            <div class="d-flex justify-content-between">
-                                <div class="d-flex align-items-center">
-                                    <h5>
-                                        <a href="#">محمود رؤف</a>
-                                    </h5>
-                                    <p class="date">2/2/2020 </p>
+            <h4>{{post.post_comment.count}}Comments</h4>
+            <div class="container mt-5">
+                {% for com in post.post_comment.all %}
+                <div class="d-flex justify-content-center row">
+                    <div class="col-md-12">
+                        <div class="d-flex flex-column comment-section">
+                            <div class="bg-white p-2">
+                                <div class="d-flex flex-row user-info"><img class="rounded-circle" src="" width="40">
+                                    <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{com.author}}</span><span class="date text-black-50">{{com.comment_date}}</span></div>
                                 </div>
-                                <div class="reply-btn">
-                                    <a href="#" class="btn-reply text-uppercase">reply</a>
+                                <div class="mt-2">
+                                    <p class="comment-text">{{com.content}}</p>
                                 </div>
+                            </div>
+                            <div class="bg-white">
+                                <div class="d-flex flex-row fs-12">
+                                    <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up" ></i><a href="{% url 'blog:like' post.id %}"><span class="ml-1">Like</span></a></div>
+                                    <div class="like p-2 cursor"><i class="fa fa-commenting-o"></i><span class="ml-1">reply</span></div>
+                                    <div class="like p-2 cursor"><i class="fa fa-share"></i><span class="ml-1">Share</span></div>
+                                </div>
+                                
+                                {% for child in children.reply %}
+                                <div class="bg-white p-2">
+                                    <div class="d-flex flex-row user-info"><img class="rounded-circle" src="" width="40">
+                                        <div class="d-flex flex-column justify-content-start ml-2"><span class="d-block font-weight-bold name">{{com.author}}</span><span class="date text-black-50">{{com.comment_date}}</span></div>
+                                    </div>
+                                    <div class="mt-2">
+                                        <p class="comment-text">{{child.content}}</p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                    
+                                <form method="POST" class="form-contact comment_form" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ reply_form }}
+                                    <div class="form-group">
+                                        <input type="hidden" name="parent_id" value="{{com.id}}">
+                                        <button type="submit" class="button button-contactForm btn_1 boxed-btn" >reply</button>
+                                    </div>          
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
 
         </div>
@@ -196,34 +218,15 @@
         <div class="comment-form">
             <h4>Leave a Reply</h4>
             <form method="POST" class="form-contact comment_form" enctype="multipart/form-data">
-
-                <div class="row">
-                    <div class="col-12">
-                    </div>
-                    <div class="col-12">
-                    <div class="form-group">
-                        <textarea class="form-control w-100" name="comments" id="comments" cols="30" rows="9"
-                            placeholder="Write Comment"></textarea>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                    </div>
-                </div>
-        
-                </div>
+                {% csrf_token %}
+                {% bootstrap_form comment_form %}
                 <div class="form-group">
                 <button type="submit" class="button button-contactForm btn_1 boxed-btn" >Send Message</button>
                 
             </div>
             </form>
-        </div>        </div>
+        </div>        
+    </div>
     <div class="col-lg-4">
         <div class="blog_right_sidebar">
                 <aside class="single_sidebar_widget search_widget">

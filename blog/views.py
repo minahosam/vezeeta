@@ -1,10 +1,10 @@
 from django.shortcuts import redirect, render
-from .models import Post
+from .models import Post , comments ,reply
 from index.models import category,place
 from taggit.models import Tag
-from django.db.models import Q
+from django.db.models import Q , Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .forms import PostForm
+from .forms import PostForm , commentForm , replyform
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 # Create your views here.
@@ -34,8 +34,46 @@ def post_search(request):
     address=place.objects.all()
     return render(request,'blog/blog_search.html',{'search_result':search_result , 'categories':categories , 'address':address})
 def blog_detail(request,id):
-    post=Post.objects.get(id=id)
-    return render(request,'blog/blog_detail.html', {'post':post})
+    post1=Post.objects.get(id=id)
+    print (post1)
+    user=request.user
+    print (request.user)
+    #global comment_count
+    #comment_count=comments.objects.filter(commented_post=post1)
+    comment=comments.objects.all()
+    if request.method=="POST":
+        comment_form=commentForm(request.POST,request.FILES)
+        if comment_form.is_valid():
+            form=comment_form.save(commit=False)
+            form.commented_post=post1
+            #print(post1)
+            form.author=user
+            #print(user)
+            form.save()
+    else:
+        comment_form=commentForm()
+    if request.method=='POST':
+        parent_id=request.POST.get('parent_id')
+        print(parent_id)
+        reply_form=replyform(request.POST,request.FILES)
+        if reply_form.is_valid():
+            parent_id=request.POST.get('parent_id')
+            print(parent_id)
+            if parent_id:
+                parent_qs=comments.objects.filter(id=parent_id)
+                print(parent_qs)
+                if parent_qs.exists() and parent_qs.count()==1:
+                    global parent_obj
+                    parent_obj=parent_qs.first()
+                    print(parent_obj)
+            form2=reply_form.save(commit=False)
+            form2.reply_author=user
+            form2.reply_post=parent_obj
+            form2.save()
+            return redirect('blog:list')
+    else:
+        reply_form=replyform()
+    return render(request,'blog/blog_detail.html', {'post':post1  , 'comment':comment , 'comment_form':comment_form , 'reply_form':reply_form})
 def update_post(request,id):
     single_post=Post.objects.get(id=id)
     if request.method=='POST':
