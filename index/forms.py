@@ -6,4 +6,4 @@ class reservation_form(forms.ModelForm):
         class Meta:
             model=doctor_reservation
             fields='__all__'
-            exclude=['name']
+            exclude=['name','email']

@@ -63,10 +63,13 @@
                         <div class="main-menu  d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a href="">احجز دكتورك</a></li>|
+                                    {% if request.user.is_authenticated %}
+                                        <li><a href="{% url 'index:my_reservation' %}">حجوزاتى</a></li>
+                                    {% endif %}
+                                    <li><a href="{% url 'index:reservation' %}">احجز دكتورك</a></li>|
                                     <li><a href="{% url 'blog:list' %}">المقالات</a></li>|
-                                    <li><a href="{% url 'index:index' %}">الصفحه الشخصيه </a></li>|
-                                    <li><a href="">اتصل بنا</a></li>
+                                    <li><a href="{% url 'index:index' %}">الصفحه الرئيسية </a></li>|
+                                    <li><a href="{% url 'contact:contact' %}">اتصل بنا</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -78,13 +81,13 @@
                             
                             {% if request.user.is_authenticated %}
                                 
-                            <div class="d-none d-lg-block">
+                            <div class="d-none d-sm-block">
                                 <a class="boxed-btn3" href="">قدم نفسك</a>
                             </div>
-                            <div class="d-none d-lg-block">
+                            <div class="d-none d-sm-block">
                                 <a class="boxed-btn3" href="">الصفحه الشخصيه</a>
                             </div>
-                            <div class="d-none d-lg-block">
+                            <div class="d-none d-sm-block">
                                 <a class="boxed-btn3" style="babackground-color: crimson;" href="{% url 'logout' %}">تسجيل خروج</a>
                             </div>
                             {% else %}

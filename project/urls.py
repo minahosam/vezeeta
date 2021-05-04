@@ -26,6 +26,7 @@ urlpatterns = [
     path('',include('index.urls',namespace='index')),
     path('blog/',include('blog.urls',namespace='blog')),
     path('froala_editor/',include('froala_editor.urls')),
+    path('contact/',include('contact.urls',namespace='contact')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

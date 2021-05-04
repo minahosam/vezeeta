@@ -44,10 +44,10 @@ def reservation(request):
     if request.method == 'POST':
         reservation=reservation_form(request.POST, request.FILES)
         if reservation.is_valid():
-            reservation.save(commit=False)
-            reservation.name=request.user.username
-            #reservation.email=request.user.email
-            reservation.save()
+            res1=reservation.save(commit=False)
+            res1.name=request.user
+            res1.email=request.user.email
+            res1.save()
             messages.success(request,'تم الحجز بنجاح')
             return redirect('index:index')
     else:
@@ -58,4 +58,5 @@ def subscribed_mail(request):
     print(email2)
     subscribed_mails.objects.create(email=email2)
     return JsonResponse({'done':'done'})
-
+def my_reservtion(request):
+    return render(request,'home/my_reservation.html')
