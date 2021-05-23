@@ -80,3 +80,10 @@ class doctor_reservation(models.Model):
     time_reservation=models.TimeField()
     def __str__(self):
         return str(self.name)
+class rate_doctor(models.Model):
+    doctor_name = models.ForeignKey(doctor_profile_1,related_name='doctor_name', on_delete=models.CASCADE)
+    user_rate=models.ForeignKey(User, related_name='user_rate', on_delete=models.CASCADE)
+    rate_value=models.FloatField(default=0.0)
+    date_rate=models.DateField()
+    time_rate=models.TimeField()
+    

@@ -7,5 +7,7 @@ urlpatterns=[
     path('home/<str:slug>/',views.detail,name='detail'),
     path('reservation/',views.reservation,name='reservation'),
     path('subscribed_mails/',views.subscribed_mail,name='subscribed'),
+    path('my-profile/',views.my_profile,name='profile'),
     path('my-reservation/',views.my_reservtion,name='my_reservation'),
+    path('rate/',views.rate,name='rate')
 ]

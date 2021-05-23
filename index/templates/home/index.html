@@ -52,19 +52,53 @@
                                     <a class="boxed-btn3" href="{% url 'index:reservation' %}">حجز كشف</a>
                                 </div>
 
-                                <div class="rating">
-                                    <div class="text-warning">
+                                <!-- <div class="rating">
+                                    <form class="rate-form">
                                         <!-- to make image category for clinic image -->
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                    </div>
+
+                                        {% if doctor.doctor_rate == rate %}
+                                        <h3>not rated until now</h3>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                        {% elif doctor.doctor_rate == rate  %}
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                        {% elif doctor.doctor_rate == rate %}
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                        {% elif doctor.doctor_rate == 3 %}
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                        {% elif doctor.doctor_rate == 4 %}
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn"></button>
+                                        {% elif doctor.doctor_rate == 5 %}
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn checked"></button>
+                                            <button class="fa fa-star my-btn checked"></button>
+                                        {% endif %}
+                                    </form>
                                     <div class="rating">
                                         <h5>تقييم الدكتور</h5>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
                         </div>
@@ -133,11 +167,11 @@
         <li class="disabled" aria-label="Previous">Previous</li>
         {% endif %}
         {% for i in doctors.paginator.page_range %}
-            {% if doctors.number == i %}
-                <li class="page-item"><a class="page-link" href="#">{{i}}</a></li>
-            {% else %}
-                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-            {% endif %}
+        {% if doctors.number == i %}
+        <li class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
         {% endfor %}
         {% if doctors.has_next %}
         <li class="page-item">
